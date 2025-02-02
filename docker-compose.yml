@@ -1,0 +1,36 @@
+networks:
+  main:
+services:
+  model:
+    build:
+      context: .
+      dockerfile: Ollama.Dockerfile
+    ports:
+      - "11434:11434"
+    networks: ['main']
+  init:
+    image: ollama/ollama
+    depends_on:
+      - model
+    volumes:
+      - "./model_files:/opt/models"
+    environment:
+      OLLAMA_HOST: "model:11434"
+    networks: ['main']
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        sleep 5
+        ollama pull gemma:2b
+        ollama pull nomic-embed-text
+        ollama create embed -f /opt/models/Embed.Modelfile
+        ollama create expert -f /opt/models/Main.Modelfile
+        ollama run embed
+        ollama run expert
+  rag-db:
+    image: chromadb/chroma
+    volumes:
+      - "./chroma_data:/chroma/chroma"
+    ports:
+      - "8000:8000"
