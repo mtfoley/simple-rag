@@ -15,6 +15,8 @@ This implements simple RAG with Ollama and ChromaDB.
 
 ## How do I use it?
 1) Copy HTML/Markdown/Text files into the ./docs directory.
-2) Start up the applications. Run `docker compose up -d`
-3) Once service "init" has exited, run `node client.js init`
-4) Once this is finished, run `node client.js search "{your question}"`, as many times as you want.
+2) Run `npm install`
+3) Start up the applications. Run `docker compose up -d`. 
+4) Watch for status of `init` container with `docker compose logs --follow init`.
+5) Once service "init" has exited, run `npm run init`.
+6) Once this is finished, run `npm run search "{your question}"`, as many times as you want.

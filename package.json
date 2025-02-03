@@ -1,14 +1,17 @@
 {
-  "name": "rag",
+  "name": "simple-rag",
+  "private": true,
   "version": "1.0.0",
-  "description": "## Tools: ChromaDB Docker",
+  "description": "Simple RAG implementation",
   "main": "client.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Tests not implemented\"",
+    "init": "node client.js init",
+    "search": "node client.js search"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chromadb": "^1.10.4",
     "chromadb-default-embed": "^2.13.2",
